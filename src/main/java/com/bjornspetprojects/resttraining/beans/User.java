@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -16,8 +18,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @ApiModel(description = "All details about the user.")
+@Entity
 public class User {
 
+    @Id
     private Long id;
     @ApiModelProperty(notes = "Name should have at least 2 characters")
     @Size(min = 2, message = "Name should have at least 2 characters")
