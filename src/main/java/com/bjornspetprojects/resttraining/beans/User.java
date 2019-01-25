@@ -7,11 +7,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -22,6 +22,7 @@ import java.time.LocalDate;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ApiModelProperty(notes = "Name should have at least 2 characters")
     @Size(min = 2, message = "Name should have at least 2 characters")
@@ -29,4 +30,7 @@ public class User {
     @ApiModelProperty(notes = "Birthdate should always be in the past")
     @Past(message = "Birthdate should be in the past")
     private LocalDate birthDate;
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
+
 }
