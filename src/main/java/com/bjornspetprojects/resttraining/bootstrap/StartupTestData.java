@@ -23,13 +23,20 @@ public class StartupTestData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        User user1 = userService.saveNewUser(User.builder().name("John Doe").birthDate(LocalDate.of(2016,2,1)).build());
-        User user2 = userService.saveNewUser(User.builder().name("Mary Poppins").birthDate(LocalDate.of(2014,1,12)).build());
-        User user3 = userService.saveNewUser(User.builder().name("Jimi Hendrix").birthDate(LocalDate.of(1948,2,1)).build());
-        User user4 = userService.saveNewUser(User.builder().name("Stevie Ray Vaughan").birthDate(LocalDate.of(1955,9,24)).build());
+        Post post1 = new Post("Went to the market!");
+        System.out.println(post1.getId());
+        Post post2 = new Post("Went to school!");
+        Post post3 = new Post("Went to bed!");
 
-        Post post1 = postRepository.save(new Post("Went to the market!",user1));
-        Post post2 = postRepository.save(new Post("Went to school!",user2));
-        Post post3 = postRepository.save(new Post("Went to bed!",user2));
+//      User user1 = User.builder().name("John Doe").birthDate(LocalDate.of(2016,2,1)).build();
+        User user1 = new User("John Doe",LocalDate.of(2016,2,1));
+        User user2 = new User("Jimi Hendrix",LocalDate.of(2011,1,1));
+        User user3 = new User("John Doe",LocalDate.of(2016,2,1));
+        user1.addPost(post1);
+        user1.addPost(post2);
+        user2.addPost(post3);
+        userService.saveNewUser(user1);
+        userService.saveNewUser(user2);
+        userService.saveNewUser(user3);
     }
 }

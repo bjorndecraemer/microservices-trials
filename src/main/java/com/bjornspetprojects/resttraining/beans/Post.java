@@ -1,6 +1,6 @@
 package com.bjornspetprojects.resttraining.beans;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,13 +8,17 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Data
 @Getter
 @Setter
 @NoArgsConstructor
 public class Post {
 
-    public Post(String description, User user){
+    public Post(Long id,String description){
+        this.description = description;
+        this.id = id;
+    }
+
+    public Post(String description){
         this.description = description;
     }
 
@@ -23,6 +27,7 @@ public class Post {
     private Long id;
     private String description;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private User user;
 }
