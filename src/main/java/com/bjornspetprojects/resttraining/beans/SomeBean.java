@@ -1,6 +1,6 @@
 package com.bjornspetprojects.resttraining.beans;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFilter;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,16 +8,16 @@ import lombok.Setter;
 @Data
 @Getter
 @Setter
+@JsonFilter("SomeBeanFilter")
 public class SomeBean {
 
-    private String value1;
-    @JsonIgnore
-    private String value2;
-    private String value3;
+    private String field1;
+    private String field2;
+    private String field3;
 
-    public SomeBean(String value1, String value2, String value3) {
-        this.value1 = value1;
-        this.value2 = value2;
-        this.value3 = value3;
+    public SomeBean(String field1, String field2, String field3) {
+        this.field1 = field1;
+        this.field2 = field2;
+        this.field3 = field3;
     }
 }
